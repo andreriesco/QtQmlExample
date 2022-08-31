@@ -1,0 +1,134 @@
+devices:
+    common: []
+    debug: []
+    release: []
+dockercomposefile:
+    common: ''
+    debug: ''
+    release: ''
+extraparms:
+    common: {}
+    debug: {}
+    release: {}
+id: d7b2d999-7837-496e-9042-d39a85397f10
+images:
+    debug: ''
+    release: ''
+imagetags:
+    debug: qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_debug_d7b2d999-7837-496e-9042-d39a85397f10
+    release: qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_release_d7b2d999-7837-496e-9042-d39a85397f10
+modificationdate: '2022-08-31T13:43:13.639043'
+networks:
+    common: []
+    debug: []
+    release: []
+otapackagename: qtQmlExample
+otapackageversion: 1.0.1
+platformid: arm32v7-qt5-wayland-no-ssh_bullseye
+ports:
+    common: {}
+    debug: {}
+    release: {}
+privatekey: '-----BEGIN RSA PRIVATE KEY-----
+
+    MIIEowIBAAKCAQEAmhmdp6zgzApgRizTqP9DUzAgTRL1D+GQAOEXbKqvPcrZ63Ar
+
+    v5WqQXBMb4tTS7inHjlvRqjG8ze1i31gPxhPE8ypwd0U7Sy0k2rxIOR28sJ7q9YF
+
+    Oa6hEFeHC8M+4hi/uI8W8q0o4mvvYetUX+TWEOgYi0L5Tsyx0ytJshetkmDWMBiq
+
+    HL7WFIrPIZzyXNCPhDd3KbcZUz289ikap4mmaVuQRnoj5mmhhRQtFmr4BFAcNqYN
+
+    CKkb1UOQVhvr3sQGaPNJni0Pcxhqhz61UJEkOwLmnBnowKTMeIxyind46v0OBJhF
+
+    0k1ekwaQc1hraxSzV+KSAQ0xB3Pcjbe4G5y+UwIDAQABAoIBAC6lq24q7F+Hko4b
+
+    mrTRFJG1g0mhf/JfPuatPJiF8Ic9hQr6iRu1E/U8J78qRzwoONpy22bhx1uvlPKV
+
+    MNHYq3NcZFTNdjy3aDAp0rU4w3MIAUTKhAlqfdIDFNuwLjRl9n9JPVKXrUUhFDUp
+
+    dgCTNmOmxms9ildaqke4llXlSgMBegS+vpZ5oORguFk72pyshOE0cJuCJHgXZeG7
+
+    /JqGipdYbkvU0+CDcI+s4AT2CasZMjxq/4BBNFzlxvKJQaLUAy/NaMPiO+H4mk6e
+
+    noN9JQ2F37IYZ0IMGwtYJtXHaQbugB1Yl5XQhSyVA9LnaAJQl5VAmdlWV9bgAi6i
+
+    9dUJyC0CgYEAxZRpsjge8mrGSrwGr0t2VX/WutEi8HrEHyeQZW0Fpb1n/WYEPcGW
+
+    O95Tyt4gmI5s7MYYyJ3SkUQXY68NLpP1CxKJ3Ytt5dIPZjw+Aq+1lKrKExkpeBEW
+
+    1Mm6kFPYPAhGvUq3gDunpN4Wxzjm1icHJy9BQ/BpuHt6DF+to6/lEXUCgYEAx6oO
+
+    K9YKP1jw08i4i0KN8iuJunTKYh/Un6g1TXCe/ygqwbjcxmoatg/6yRtxQ7VQNw05
+
+    pIL8URp1Y27tmWXpcRChj57aps25ACx1nVQdRLkpWEUyolkksaBqjrEbBHbJm0Tp
+
+    YuKrza5g/u4gEX+IlXvnrTv5jxm6/qv7h9r2j6cCgYA6H/84Pupbxq2vLsGIsFqP
+
+    rJwvOXdd57/qqmkAbaJLr/z3vxtgT6My2aUs+Uv9lWjV/zErU8KumamH2ee23DAq
+
+    obmNQ4eBJNsC6JYVlDuHEPeBxtU8TUq6Lt6DtybWAllNNr3lK6eWCQAKe+Ls/W5N
+
+    SMmagw+XBjxRh5Q9o3FwQQKBgQCAuj4KuyO+NcyG7pk0h8NWiAVzJks5OkZubRd4
+
+    hwyrey0d2t7UOaJhESpiMIQ04BgIdklcrGqaq5FVezZKuS7pi4xuOT/FXUtSNlfa
+
+    CFoabbqfQ3Xiv9BtiPxKZRsDJMbUiXhjHbsgj7XPhp08Sto3bjwvL0S1oyQxf5Za
+
+    v6xJbwKBgAVLjSEefQmI91fayEtloUpx9O7M1Dseytr8bRjrtmb8GXizwIuk9JYo
+
+    KgYcRxKzEcukn+4pu/1O88bDo1V6cjft/f1sE9qXvkc0ZS9zhsnbsm5ifvsMJeWq
+
+    hi3Obo5QrH5DWR0464Mj1FI0LXrsGKoW68X0yakU+reKlZ149Ok5
+
+    -----END RSA PRIVATE KEY-----
+
+    '
+props:
+    common:
+        appname: qtQmlExample
+        arg: ''
+        buildcommands: ''
+        buildfiles: ''
+        command: ''
+        devpackages: qtdeclarative5-dev:#%platform.debian-arch%# libegl-dev:#%platform.debian-arch%#
+            libgl-dev:#%platform.debian-arch%#
+        env: ''
+        exename: qtQmlExample
+        expose: ''
+        extrapackages: qml-module-qtquick2 qml-module-qtquick-window2
+        language: c-cpp-nossh
+        preinstallcommands: ''
+        sdkpostinstallcommands: ''
+        sdkpreinstallcommands: ''
+        tag: andreriesco/qtqmlexample
+        targetcommands: ''
+        targetfiles: ''
+    debug:
+        arg: 'ARG SSHUSERNAME=#%application.username%#
+
+            '
+    release: {}
+publickey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCaGZ2nrODMCmBGLNOo/0NTMCBNEvUP4ZAA4Rdsqq89ytnrcCu/lapBcExvi1NLuKceOW9GqMbzN7WLfWA/GE8TzKnB3RTtLLSTavEg5Hbywnur1gU5rqEQV4cLwz7iGL+4jxbyrSjia+9h61Rf5NYQ6BiLQvlOzLHTK0myF62SYNYwGKocvtYUis8hnPJc0I+EN3cptxlTPbz2KRqniaZpW5BGeiPmaaGFFC0WavgEUBw2pg0IqRvVQ5BWG+vexAZo80meLQ9zGGqHPrVQkSQ7AuacGejApMx4jHKKd3jq/Q4EmEXSTV6TBpBzWGtrFLNX4pIBDTEHc9yNt7gbnL5T
+sdkimages:
+    debug: sha256:34b4f9afa7be71dba118018ac3e8f8275719747d5c3f9e290c12ec65d0ce4287
+    release: sha256:34b4f9afa7be71dba118018ac3e8f8275719747d5c3f9e290c12ec65d0ce4287
+sdkimagetags:
+    debug: qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_debug_d7b2d999-7837-496e-9042-d39a85397f10_sdk_image
+    release: qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_release_d7b2d999-7837-496e-9042-d39a85397f10_sdk_image
+sdksshaddress:
+    debug: null
+    release: null
+shutdownscript:
+    common: ''
+    debug: ''
+    release: ''
+startupscript:
+    common: ''
+    debug: ''
+    release: ''
+username: torizon
+volumes:
+    common: {}
+    debug: {}
+    release: {}

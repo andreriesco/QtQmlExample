@@ -1,0 +1,34 @@
+# docker-compose.yml
+services:
+  qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_release_d7b2d999-7837-496e-9042-d39a85397f10:
+    depends_on:
+    - weston
+    device_cgroup_rules:
+    - c 226:* rmw
+    devices: []
+    image: andreriesco/qtqmlexample
+    ports: []
+    volumes:
+    - /tmp:/tmp:rw
+    - /dev/dri:/dev/dri:rw
+  weston:
+    cap_add:
+    - CAP_SYS_TTY_CONFIG
+    device_cgroup_rules:
+    - c 4:0 rmw
+    - c 4:7 rmw
+    - c 13:* rmw
+    - c 226:* rmw
+    image: torizon/weston:2
+    network_mode: host
+    volumes:
+    - source: /tmp
+      target: /tmp
+      type: bind
+    - source: /dev
+      target: /dev
+      type: bind
+    - source: /run/udev
+      target: /run/udev
+      type: bind
+version: '2.4'

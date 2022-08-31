@@ -1,0 +1,49 @@
+label: Qt QML sample
+detail: '$(symbol-misc) Creates a basic Qt sample, with QML UI'
+tags:
+  - qt
+env:
+  AR: '%{torizon.prefix}ar'
+  AS: '%{torizon.prefix}as'
+  CC: '%{torizon.prefix}gcc'
+  CXX: '%{torizon.prefix}g++'
+  CPP: '%{torizon.prefix}cpp'
+  STRIP: '%{torizon.prefix}strip'
+  LD: '%{torizon.prefix}ld'
+  CROSS_COMPILE: '%{torizon.prefix}'
+  QMAKE: '%{torizon.prefix}qmake'
+  QT_INCLUDES: '%{torizon.qt-includepath}'
+checkfiles:
+  - ^.*\.(pro)$
+properties:
+  props:
+    common:
+      extrapackages: qml-module-qtquick2 qml-module-qtquick-window2
+      devpackages: >-
+        qtdeclarative5-dev:#%platform.debian-arch%#
+        libegl-dev:#%platform.debian-arch%# libgl-dev:#%platform.debian-arch%#
+    debug: {}
+    release: {}
+testing:
+  - title: Qt5
+    createCmd: torizon.createCCPPApp
+    projName: CCPPQtQml
+    platformDistroCodeName: bullseye
+    baseContainer:
+      arm32v7: qt5-wayland-no-ssh_bullseye
+      arm64v8: qt5-vivante-no-ssh_bullseye
+    mainSourceFile: FreshNewCCPPQtQml.cpp
+    mainSourceFileBreakPoint: 19
+    programOutput:
+      arm32v7: >-
+        Loaded
+        'target:/usr/lib/arm-linux-gnueabihf/qt5/plugins/platforms/libqwayland-generic.so'.
+        Symbols loaded.
+      arm64v8: >-
+        Loaded
+        'target:/usr/lib/aarch64-linux-gnu/qt5/plugins/platforms/libqwayland-generic.so'.
+        Symbols loaded.
+    hasSDKContainer: true
+    stopOnEntry: true
+    messageOnTerminalConsole: false
+extversion: 1.6.0

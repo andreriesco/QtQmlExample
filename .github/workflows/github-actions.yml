@@ -1,0 +1,61 @@
+name: 'GitHub Actions build, push and publish app'
+'on':
+  - push
+  - pull_request
+jobs:
+  build-push-publish:
+    timeout-minutes: 360
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: '${{ github.workspace }}'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Moses Up
+        run: |
+          echo "${{ github.workspace }}" >> $GITHUB_PATH
+          sudo apt-get update
+          sudo apt-get install libexpat1
+          wget -O moses-linux.zip https://docs1.toradex.com/111503-moses-linux.zip && unzip moses-linux.zip && mv ./moses/dist/moses-linux ./moses-linux && rm ./moses-linux.zip && rm -fr ./moses
+          cd moses-linux
+          sudo chmod +x moses
+          sudo chmod +x tdskt
+          sudo ./moses &
+          sleep 15
+      - name: EULA Accept
+        run: |
+          sudo ./moses-linux/tdskt eula nxp-la-opt-v5 setprop accepted true
+      - name: Enable Emulation
+        run: |
+          ./moses-linux/tdskt -p enableemulation
+      - name: Load Application
+        run: |
+          APPID=$(./moses-linux/tdskt load ./appconfig_0/)
+          echo "APPID=$APPID" >> $GITHUB_ENV
+      - name: Build SDK Container
+        run: |
+          ./moses-linux/tdskt -p application ${{ env.APPID }} runsdk release
+      - name: Compile And Install The Source Code
+        run: |
+          docker run --rm -t -v ${PWD}:/workspaces/${{ github.event.repository.name }} --env-file ./appconfig_0/containerEnv \
+          qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_release_d7b2d999-7837-496e-9042-d39a85397f10_sdk_image bash -c "cd /workspaces/${{ github.event.repository.name }} && arm-linux-gnueabihf-qmake && make && make install"
+      - name: Build application
+        run: |
+          ./moses-linux/tdskt -p application ${{ env.APPID }} build release
+      - name: DockerHub Login
+        uses: docker/login-action@v2
+        with:
+          username: andreriesco
+          password: '${{ secrets.DOCKERHUB_TOKEN }}'
+      - name: Push Application To DockerHub
+        run: |
+          docker tag qtqmlexample_arm32v7-qt5-wayland-no-ssh_bullseye_release_d7b2d999-7837-496e-9042-d39a85397f10:latest andreriesco/qtqmlexample 
+          docker push andreriesco/qtqmlexample
+      - name: Publish Application To OTA Server
+        run: |
+          cd ${{ github.workspace }} 
+          echo "${{ secrets.TORIZON_OTA_CREDENTIALS }}" | base64 -d > credentials.zip 
+          shopt -s expand_aliases 
+          alias torizoncore-builder='docker run --rm -v /deploy -v "$(pwd)":/workdir -v storage:/storage -v /var/run/docker.sock:/var/run/docker.sock --network=host torizon/torizoncore-builder:3' 
+          torizoncore-builder platform push --credentials credentials.zip --package-name qtQmlExample --package-version qtQmlExample-1.0.1 docker-compose.yml
